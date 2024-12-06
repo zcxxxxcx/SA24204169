@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Zhang chunxu" />
+
+<meta name="date" content="2024-12-07" />
+
+<title>example</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">example</h1>
+<h4 class="author">Zhang chunxu</h4>
+<h4 class="date">2024-12-07</h4>
+
+
+
+<div id="distributed-robust-optimization-and-sharpe-ratio-statistical-inference" class="section level1">
+<h1>Distributed Robust Optimization and Sharpe Ratio Statistical
+Inference</h1>
+<p>This vignette introduces two key functionalities provided in this R
+package: 1. <strong>Distributed Robust Optimization Solver</strong>:
+Solves a distributed robust optimization problem by minimizing the
+objective function. 2. <strong>Sharpe Ratio Statistical
+Inference</strong>: Computes the p-value for statistical inference on
+Sharpe ratios between two datasets.</p>
+<p>These tools provide powerful support for financial optimization and
+statistical analysis.</p>
+<hr />
+<div id="distributed-robust-optimization-function" class="section level2">
+<h2>Distributed Robust Optimization Function</h2>
+<p>Robust optimization is widely used to address uncertainty in
+optimization problems. This function solves the following problem:</p>
+<p><span class="math display">\[
+\min_{\phi\in\mathcal{F}_{\delta,\bar{\alpha}}(n)}\max_{P\in\mathcal{U}_{\delta}(P_{n})}\{\phi^{T}Var_{P}(R)\phi\}
+\]</span></p>
+<p>The problem is equivalent to the following dual problem which is
+tractable.(Blanchet, J., Chen, L., &amp; Zhou, X. Y. (2022))</p>
+<p><span class="math display">\[
+\min_{\phi\in\mathcal{F}_{\delta,\bar{\alpha}}(n)}\left(\sqrt{\phi^{T}Var_{P_{n}}\left(R\right)\phi}+\sqrt{\delta}||\phi||_{p}\right)^{2}
+\]</span></p>
+<p>The <code>opt_w</code> function (defined in <code>opt_w.R</code>)
+implements the above optimization and gives a serie of earning rates
+using the <code>Rolling horizon</code> method as well as difference of
+the optimal weights so that we can evaluate the transaction costs.</p>
+<div id="an-example" class="section level3">
+<h3>An example</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Load the data from the .rda file</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">system.file</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;data.rda&quot;</span>, <span class="at">package =</span> <span class="st">&quot;SA24204169&quot;</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">dim</span>(data)[<span class="dv">2</span>] <span class="co">#dim of the data</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>w0 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span>d,d) <span class="co"># Initial weight</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">120</span> <span class="co"># Window</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="fl">1e-3</span> <span class="co"># Robustness parameter</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.1</span> <span class="co"># Adjusted expected return</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>result <span class="ot">&lt;-</span> SA24204169<span class="sc">::</span><span class="fu">optimize_weights</span>(data, w0, n, delta, alpha)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>result</span></code></pre></div>
+<pre><code>## $returns
+##  [1]  0.0357061748  0.0685491902  0.0299355628 -0.0797982582 -0.0625068344
+##  [6]  0.0688767322 -0.0514589125  0.0982664110  0.0361884670  0.0088501582
+## [11]  0.0706670594  0.0178684847  0.0393498076  0.0073634022  0.0272502776
+## [16] -0.0149213227 -0.0184177543 -0.0253730946 -0.0613685605 -0.0783172123
+## [21]  0.1177226677 -0.0006177419  0.0080501952  0.0507814620  0.0404616045
+## [26]  0.0286086279 -0.0086983875 -0.0609215883  0.0388571449  0.0084271492
+## [31]  0.0254108672  0.0285684141 -0.0161881164  0.0060227278  0.0131647045
+## [36]  0.0543822467  0.0118546839  0.0385827172  0.0129669794  0.0302085374
+## [41] -0.0103360462  0.0556384784 -0.0275669808  0.0398214134  0.0410494092
+## [46]  0.0292396617  0.0274080752 -0.0356711389  0.0474116094  0.0068997469
+## [51] -0.0060392339  0.0169203431  0.0259853844 -0.0202477327  0.0415395386
+## [56] -0.0232791199  0.0224134578  0.0195221233 -0.0062910119 -0.0247389478
+## [61]  0.0587174338 -0.0078620289 -0.0013090046  0.0141717377 -0.0168959662
+## [66]  0.0023811300 -0.0561462392 -0.0346541027  0.0707737905  0.0182270125
+## [71] -0.0282895025 -0.0575576671  0.0002394069  0.0659190413 -0.0006751534
+## [76]  0.0129999096 -0.0021361926  0.0317371359 -0.0010253559  0.0002753309
+## 
+## $weight_diff
+##  [1] 0.59144017 0.05509807 0.08495329 0.06013926 0.13843631 0.06235502
+##  [7] 0.04488443 0.06919296 0.08118249 0.03492623 0.09827991 0.11545025
+## [13] 0.15456615 0.21233379 0.05968822 0.08498466 0.19876828 0.10716832
+## [19] 0.17923117 0.08017658 0.17200116 0.07339299 0.11103664 0.03081494
+## [25] 0.07349459 0.07174252 0.08660876 0.10876322 0.10382537 0.04738115
+## [31] 0.16271682 0.09786533 0.05227729 0.07248827 0.06341564 0.14230210
+## [37] 0.22802527 0.29514601 0.06999792 0.09467596 0.20274889 0.15425822
+## [43] 0.04056258 0.18029500 0.18057665 0.09355999 0.15498283 0.18740471
+## [49] 0.05340518 0.33640529 0.58680425 0.44194949 0.40721326 0.51554818
+## [55] 0.26738828 0.46086308 0.47751652 0.39309274 0.50921790 0.54785963
+## [61] 0.84480685 0.51736723 0.33436321 0.35745634 0.60650901 0.38820869
+## [67] 0.40623538 0.35137411 0.57438240 0.34227786 0.66856055 0.37882022
+## [73] 0.41444479 0.53415258 0.58416386 0.73897947 0.54809720 0.88710633
+## [79] 0.69631324 0.72315437</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">hist</span>(result<span class="sc">$</span>returns, <span class="at">main =</span> <span class="st">&quot;Distribution of earning rates&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Returns&quot;</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<hr />
+</div>
+</div>
+<div id="sharpe-ratio-statistical-inference-function" class="section level2">
+<h2>Sharpe Ratio Statistical Inference Function</h2>
+<p>The Sharpe ratio is a key metric for assessing portfolio performance.
+The <code>pvalue</code> function calculates the p-value for statistical
+inference on Sharpe ratios between two datasets, helping to evaluate the
+significance of portfolio performance differences.The method we applied
+is from Jobson &amp; Korkie (1981).</p>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> result<span class="sc">$</span>returns <span class="co"># returns we get above</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(r1)) <span class="co"># simulated data for convenience</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>SA24204169<span class="sc">::</span><span class="fu">pvalue</span>(r1,r2)</span></code></pre></div>
+<pre><code>## [1] 0.04434364</code></pre>
+<hr />
+<p>This R package provides robust tools for financial optimization and
+statistical analysis: - The <strong>Distributed Robust
+Optimization</strong> function addresses constrained optimization
+problems. - The <strong>Sharpe Ratio Statistical Inference</strong>
+function offers a statistical test for Sharpe ratio differences.</p>
+<p>Users can extend these functions for broader applications in
+financial analytics.</p>
+<hr />
+</div>
+</div>
+<div id="reference" class="section level2">
+<h2>Reference</h2>
+<p>Blanchet, J., Chen, L., Zhou, X. Y. Distributionally robust
+mean-variance portfolio selection with Wasserstein distances[J].
+Management Science, 2022, 68(9): 6382-6410.</p>
+<p>Jobson, J. D., Korkie, B. M. Performance hypothesis testing with the
+Sharpe and Treynor measures[J]. Journal of Finance, 1981, 36:
+889-908.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

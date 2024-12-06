@@ -1,0 +1,107 @@
+---
+title: "example"
+author: "Zhang chunxu"
+date: "2024-12-07"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{example}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Distributed Robust Optimization and Sharpe Ratio Statistical Inference
+
+This vignette introduces two key functionalities provided in this R
+package: 1. **Distributed Robust Optimization Solver**: Solves a
+distributed robust optimization problem by minimizing the objective
+function. 2. **Sharpe Ratio Statistical Inference**: Computes the
+p-value for statistical inference on Sharpe ratios between two datasets.
+
+These tools provide powerful support for financial optimization and
+statistical analysis.
+
+------------------------------------------------------------------------
+
+## Distributed Robust Optimization Function
+
+Robust optimization is widely used to address uncertainty in
+optimization problems. This function solves the following problem:
+
+$$
+\min_{\phi\in\mathcal{F}_{\delta,\bar{\alpha}}(n)}\max_{P\in\mathcal{U}_{\delta}(P_{n})}\{\phi^{T}Var_{P}(R)\phi\}
+$$
+
+The problem is equivalent to the following dual problem which is tractable.(Blanchet, J., Chen, L., & Zhou, X. Y. (2022))
+
+$$
+\min_{\phi\in\mathcal{F}_{\delta,\bar{\alpha}}(n)}\left(\sqrt{\phi^{T}Var_{P_{n}}\left(R\right)\phi}+\sqrt{\delta}||\phi||_{p}\right)^{2}
+$$
+
+The `opt_w` function (defined in `opt_w.R`) implements the above
+optimization and gives a serie of earning rates using the `Rolling horizon` 
+method as well as difference of the optimal weights so that 
+we can evaluate the transaction costs.
+
+### An example
+```{r}
+# Load the data from the .rda file
+load(system.file("data", "data.rda", package = "SA24204169"))
+d <- dim(data)[2] #dim of the data
+w0 <- rep(1/d,d) # Initial weight
+n <- 120 # Window
+delta <- 1e-3 # Robustness parameter
+alpha <- -0.1 # Adjusted expected return
+
+result <- SA24204169::optimize_weights(data, w0, n, delta, alpha)
+result
+hist(result$returns, main = "Distribution of earning rates", xlab = "Returns")
+```
+
+------------------------------------------------------------------------
+
+## Sharpe Ratio Statistical Inference Function
+
+
+The Sharpe ratio is a key metric for assessing portfolio performance.
+The `pvalue` function calculates the p-value for statistical inference
+on Sharpe ratios between two datasets, helping to evaluate the
+significance of portfolio performance differences.The method we applied is 
+from Jobson & Korkie (1981).
+
+### Example
+```{r}
+set.seed(0)
+r1 <- result$returns # returns we get above
+r2 <- rnorm(length(r1)) # simulated data for convenience
+SA24204169::pvalue(r1,r2)
+
+```
+
+------------------------------------------------------------------------
+
+This R package provides robust tools for financial optimization and
+statistical analysis: - The **Distributed Robust Optimization** function
+addresses constrained optimization problems. - The 
+**Sharpe Ratio Statistical Inference** function offers a statistical test for Sharpe
+ratio differences.
+
+Users can extend these functions for broader applications in financial
+analytics.
+
+------------------------------------------------------------------------
+
+## Reference
+
+Blanchet, J., Chen, L., Zhou, X. Y. Distributionally robust mean-variance
+portfolio selection with Wasserstein distances[J]. Management Science,
+2022, 68(9): 6382-6410.
+
+Jobson, J. D., Korkie, B. M. Performance hypothesis testing with the
+Sharpe and Treynor measures[J]. Journal of Finance, 1981, 36: 889-908.

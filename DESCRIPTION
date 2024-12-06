@@ -1,0 +1,17 @@
+Package: SA24204169
+Type: Package
+Title: R package for DRO mean-var model and StatComp homework
+Version: 1.0
+Date: 2024-12-06
+Author: Zhang chunxu
+Maintainer: Zhang chunxu <1336033867@qq.com>
+Description: This package is for the DRO mean-var model and StatComp homework. It includes functions for statistical modeling, data visualization, and more.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.13), nloptr, microbenchmark, bootstrap, coda, gmp, MASS, boot, DAAG 
+LinkingTo: Rcpp
+RoxygenNote: 7.3.2
+Encoding: UTF-8
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+URL: http://github.com/zcxxxxcx/SA24204169 
+BugReports: http://github.com/zcxxxxcx/SA24204169/issues 
